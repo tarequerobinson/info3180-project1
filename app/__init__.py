@@ -25,6 +25,7 @@ def get_uploaded_images():
     for filename in os.listdir(upload_folder):
         if filename.endswith(('.jpg', '.png', '.jpeg')):
             images.append(filename)
+    print (images)
     return images
 
 

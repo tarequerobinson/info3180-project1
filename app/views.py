@@ -124,3 +124,13 @@ def files():
 
 
 
+@app.route('/logout')
+def logout():
+    # Check if the user is authenticated
+    if current_user.is_authenticated:
+        # Logout the user
+        logout_user()
+        # Flash a message to the user
+        flash('You have been logged out successfully.', 'success')
+    # Redirect the user to the home route
+    return redirect(url_for('home'))
