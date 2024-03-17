@@ -16,9 +16,12 @@
         height: 100%;
 
     }
-
+    .card-body h4{
+        color: black;
+    }
     .card-body {
         padding: 10px;
+        color: rgb(143, 143, 143);
     }
 
     .image-item {
@@ -43,21 +46,36 @@
         border: solid 2px #fff;
         color:#fff;
     }
+
+    .price{
+        padding: 20px;
+        border-radius: 20px;
+        width: 160px;
+        height: 40px;
+        display: flex; /* Add display flex */
+        justify-content: center;
+        align-items: center;
+        background: rgb(64, 140, 255);
+        color: #fff;
+
+
+
+    }
 </style>
 
 <div class="image-grid">
     {% for property in properties %}
     <div class="card">
-        <!-- <div class="card-body"> -->
             <div class="image-item">
                 <img src="../static/uploads/{{ property.image_path }}" alt="{{ property.image_path }}">
             </div>
-        <!-- </div> -->
+
         <div class="card-body">
-            <h3>{{ property.title }}</h3>
-            <p><i class="fa fa-map-marker"></i>
-                Location: {{ property.location }}</p>
-            <p>Price: ${{ property.price }}</p>
+            <h4>{{ property.property_title }}</h4>
+
+            <p><i class="fas fa-map-marker-alt"></i>
+            {{ property.location }}</p>
+            <p class="price">${{ property.price }}</p>
         </div>
         <div class="btn-container">
             <button class="  btn-block bg-primary" onclick="window.location.href='{{ url_for('display_property', id=property.id) }}'">View Property</button>

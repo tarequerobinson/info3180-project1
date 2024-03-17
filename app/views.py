@@ -31,7 +31,7 @@ def about():
     return render_template('about.html', name="Mary Jane")
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/properties/create', methods=['GET', 'POST'])
 # @login_required
 def upload():
     form = UploadForm()

@@ -6,7 +6,7 @@
   {% include 'flash_messages.html' %}
 
   {# Add the appropriate method and enctype attributes to the form tag to allow for file uploads #}
-  <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}">
+  <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}" style="max-width: 400px; margin: 0 auto;">
     {# Add the file upload field from the UploadForm #}
     {{ form.csrf_token }}
 
@@ -19,35 +19,87 @@
         {{ form.description.label(class="form-control-label") }}
         {{ form.description(class="form-control") }}
     </div>
-    <div class="form-group">
-        {{ form.location.label(class="form-control-label") }}
-        {{ form.location(class="form-control") }}
-    </div>
-    <div class="form-group">
-        {{ form.type.label(class="form-control-label") }}
-        {{ form.type(class="form-control") }}
-    </div>
-    <div class="form-group">
-        {{ form.number_of_bathrooms.label(class="form-control-label") }}
-        {{ form.number_of_bathrooms(class="form-control") }}
+    <div class="form-group" style="display: flex; justify-content: space-between;">
+        <div style="flex-grow: 1;">
+            {{ form.number_of_bathrooms.label(class="form-control-label") }}
+            {{ form.number_of_bathrooms(class="form-control") }}
+        </div>
+        <div style="flex-grow: 1; margin-left: 10px;">
+            {{ form.number_of_bedrooms.label(class="form-control-label") }}
+            {{ form.number_of_bedrooms(class="form-control") }}
+        </div>
     </div>
 
-    <div class="form-group">
-      {{ form.number_of_bedrooms.label(class="form-control-label") }}
-      {{ form.number_of_bedrooms(class="form-control") }}
+
+
+      <div class="form-group" style="display: flex; justify-content: space-between;">
+      <div class="form-group">
+        {{ form.location.label(class="form-control-label") }}
+        {{ form.location(class="form-control") }}
+      </div>
+
+      <div class="form-group">
+      {{ form.type.label(class="form-control-label") }}
+      {{ form.type(class="form-control") }}
+      </div>
+
+
+
+
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="form-group">
         {{ form.price.label(class="form-control-label") }}
         {{ form.price(class="form-control") }}
     </div>
-
     <div class="form-group">
-      {{ form.photo.label(class="form-control-label") }}
-      {{ form.photo(class="form-control-file") }}
-      {% for error in form.photo.errors %}
-      <span class="text-danger">{{ error }}</span>
-      {% endfor %}
+        {{ form.photo.label(class="form-control-label") }}
+        {{ form.photo(class="form-control-file") }}
+        {% for error in form.photo.errors %}
+        <span class="text-danger">{{ error }}</span>
+        {% endfor %}
     </div>
   
     <button type="submit" class="btn btn-primary">Submit</button>

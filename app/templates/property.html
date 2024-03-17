@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<!-- <h1 class="page-header">{{ property.property_title }}</h1> -->
 
 <style>
     @font-face {
         font-family: 'Sansation Light';
         src: url('sansation_light.woff') format('woff');
-        /* Add additional font formats here if necessary */
     }
     
     *{
@@ -17,14 +15,13 @@
 
 
     .property-details {
-        display: flex; /* Use flexbox layout */
-        align-items: center; /* Align items vertically */
+        display: flex; 
         height: 500px;
     }
     
     .property-image {
-        flex: 0 0 auto; /* Make the image container non-flexible */
-        margin-right: 20px; /* Add some spacing between the image and details */
+        flex: 0 0 auto;
+        margin-right: 20px; 
         width: 500px;
         height: 500px;
         background-color: beige;
@@ -33,27 +30,33 @@
 
     img {
         width: 100%;
-        height: 100%; /* Ensure the image always fills out its parent container */
-        object-fit: cover; /* Scale the image while maintaining aspect ratio and covering the container */
+        height: 100%;
+        object-fit: cover; 
     }
         
     .property-info {
-        flex: 1; /* Allow property info to grow and take remaining space */
+        flex: 1; 
     }
 
     .btn-container {
-        margin-top: auto; /* Push the button to the bottom of the card */
+        margin-top: auto; 
     }
 
     button{
         align-items: left;
         border: none;
         background-color: #0472d8 ; 
+        color: #fff;
+        border-radius: 7px;
+            height: 50px;
+            width: 130px;
     }
 
     .priceandtype , .rooms{
 
         display: flex;
+        width: 340px;
+        justify-content: space-between;
     }
 
     .price, .type {
@@ -61,17 +64,26 @@
         border-radius: 20px;
         width: 160px;
         height: 40px;
-        display: flex; /* Add display flex */
+        display: flex; 
         justify-content: center;
         align-items: center;
+        color: #fff;
+
+
     }
+    .price p, .type p{
+        
+        margin: 0; 
+        
+        text-align: center;} 
+
     
     .price {
-        background: rgb(0, 102, 255);
+        background: rgb(45, 129, 255);
     }
     
     .type {
-        background: rgb(255, 217, 0);
+        background: rgb(206, 175, 0);
     }
     .rooms{
 
@@ -118,7 +130,7 @@
 
     
         <div btn-container>
-            <button class="btn btn-primary btn-block "  >Email Realtor</button>
+            <button class="bg-primary btn-block "  >Email Realtor</button>
 
         </div>
     </div>
