@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .form-group {
+      margin-bottom: 10px; /* Adjust spacing between form groups */
+    }
+  </style>
+{% endblock %}
+
 {% block main %}
   <h1 class="page-header">Add New Property</h1>
 
@@ -9,97 +23,51 @@
   <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}" style="max-width: 400px; margin: 0 auto;">
     {# Add the file upload field from the UploadForm #}
     {{ form.csrf_token }}
-
     {{ form.hidden_tag() }}
+
     <div class="form-group">
-        {{ form.title.label(class="form-control-label") }}
-        {{ form.title(class="form-control") }}
+      {{ form.title.label(class="form-control-label") }}
+      {{ form.title(class="form-control") }}
     </div>
+
     <div class="form-group">
-        {{ form.description.label(class="form-control-label") }}
-        {{ form.description(class="form-control") }}
+      {{ form.description.label(class="form-control-label") }}
+      {{ form.description(class="form-control") }}
     </div>
+
     <div class="form-group" style="display: flex; justify-content: space-between;">
-        <div style="flex-grow: 1;">
-            {{ form.number_of_bathrooms.label(class="form-control-label") }}
-            {{ form.number_of_bathrooms(class="form-control") }}
-        </div>
-        <div style="flex-grow: 1; margin-left: 10px;">
-            {{ form.number_of_bedrooms.label(class="form-control-label") }}
-            {{ form.number_of_bedrooms(class="form-control") }}
-        </div>
+      <div style="flex-grow: 1;">
+        {{ form.number_of_bathrooms.label(class="form-control-label") }}
+        {{ form.number_of_bathrooms(class="form-control") }}
+      </div>
+      <div style="flex-grow: 1; margin-left: 10px;">
+        {{ form.number_of_bedrooms.label(class="form-control-label") }}
+        {{ form.number_of_bedrooms(class="form-control") }}
+      </div>
     </div>
 
-
-
-      <div class="form-group" style="display: flex; justify-content: space-between;">
-      <div class="form-group">
+    <div class="form-group" style="display: flex; justify-content: space-between;">
+      <div>
         {{ form.location.label(class="form-control-label") }}
         {{ form.location(class="form-control") }}
       </div>
-
-      <div class="form-group">
-      {{ form.type.label(class="form-control-label") }}
-      {{ form.type(class="form-control") }}
+      <div>
+        {{ form.type.label(class="form-control-label") }}
+        {{ form.type(class="form-control") }}
       </div>
-
-
-
-
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="form-group">
-        {{ form.price.label(class="form-control-label") }}
-        {{ form.price(class="form-control") }}
     </div>
+
     <div class="form-group">
-        {{ form.photo.label(class="form-control-label") }}
-        {{ form.photo(class="form-control-file") }}
-        {% for error in form.photo.errors %}
+      {{ form.price.label(class="form-control-label") }}
+      {{ form.price(class="form-control") }}
+    </div>
+
+    <div class="form-group">
+      {{ form.photo.label(class="form-control-label") }}
+      {{ form.photo(class="form-control-file") }}
+      {% for error in form.photo.errors %}
         <span class="text-danger">{{ error }}</span>
-        {% endfor %}
+      {% endfor %}
     </div>
   
     <button type="submit" class="btn btn-primary">Submit</button>
