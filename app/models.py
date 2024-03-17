@@ -39,3 +39,22 @@ class UserProfile(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+    
+
+
+
+
+
+class Property(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    property_title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    location = db.Column(db.String(255), nullable=False)
+    property_type = db.Column(db.String(50), nullable=False)
+    bedrooms = db.Column(db.Integer, nullable=False)
+    bathrooms = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    image_path = db.Column(db.String(255), nullable=True)
+
+    def __repr__(self):
+        return f"Property('{self.property_title}', '{self.location}', '{self.price}')"

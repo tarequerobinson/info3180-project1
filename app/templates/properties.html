@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1 class="page-header">Properties</h1>
+
+<style>
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Display 3 items per row */
+        grid-gap: 10px;
+    }
+    
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .image-item {
+        width: 100%;
+        height: 300px; /* Set your desired image container height */
+        overflow: hidden;
+    }
+
+    .image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the image covers the container */
+    }
+
+    .btn-container {
+        margin-top: auto; /* Push the button to the bottom of the card */
+    }
+
+    button{
+        width: 100%;
+        height: 60px;
+        border: solid 2px #fff;
+        color:#fff;
+    }
+</style>
+
+<div class="image-grid">
+    {% for property in properties %}
+    <div class="card">
+        <!-- <div class="card-body"> -->
+            <div class="image-item">
+                <img src="../static/uploads/{{ property.image_path }}" alt="{{ property.image_path }}">
+            </div>
+        <!-- </div> -->
+        <div class="card-body">
+            <h3>{{ property.title }}</h3>
+            <p><i class="fa fa-map-marker"></i>
+                Location: {{ property.location }}</p>
+            <p>Price: ${{ property.price }}</p>
+        </div>
+        <div class="btn-container">
+            <button class="  btn-block bg-primary" onclick="window.location.href='{{ url_for('display_property', id=property.id) }}'">View Property</button>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

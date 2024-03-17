@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- <h1 class="page-header">{{ property.property_title }}</h1> -->
+
+<style>
+    @font-face {
+        font-family: 'Sansation Light';
+        src: url('sansation_light.woff') format('woff');
+        /* Add additional font formats here if necessary */
+    }
+    
+    *{
+        font-family: 'Roboto', sans-serif;
+    }
+
+
+
+    .property-details {
+        display: flex; /* Use flexbox layout */
+        align-items: center; /* Align items vertically */
+        height: 500px;
+    }
+    
+    .property-image {
+        flex: 0 0 auto; /* Make the image container non-flexible */
+        margin-right: 20px; /* Add some spacing between the image and details */
+        width: 500px;
+        height: 500px;
+        background-color: beige;
+
+    }
+
+    img {
+        width: 100%;
+        height: 100%; /* Ensure the image always fills out its parent container */
+        object-fit: cover; /* Scale the image while maintaining aspect ratio and covering the container */
+    }
+        
+    .property-info {
+        flex: 1; /* Allow property info to grow and take remaining space */
+    }
+
+    .btn-container {
+        margin-top: auto; /* Push the button to the bottom of the card */
+    }
+
+    button{
+        align-items: left;
+        border: none;
+        background-color: #0472d8 ; 
+    }
+
+    .priceandtype , .rooms{
+
+        display: flex;
+    }
+
+    .price, .type {
+        padding: 20px;
+        border-radius: 20px;
+        width: 160px;
+        height: 40px;
+        display: flex; /* Add display flex */
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .price {
+        background: rgb(0, 102, 255);
+    }
+    
+    .type {
+        background: rgb(255, 217, 0);
+    }
+    .rooms{
+
+        width: 130px;
+        justify-content: space-between;
+    }
+    
+    
+</style>
+
+<div class="property-details">
+    <div class="property-image">
+        <img src="../static/uploads/{{ property.image_path }}" alt="{{ property.property_title }}">
+    </div>
+    <div class="property-info">
+        <h1>{{ property.property_title }}</h1>
+    <div class="priceandtype">
+        <div class="price">
+            <p >${{ property.price }}</p>
+        </div>
+
+
+        <div class="type">
+
+        <p >
+            
+            {{ property.property_type }}
+        
+        
+        </p>
+        </div>
+    </div>
+
+        <p><strong>Description:</strong> {{ property.description }}</p>
+
+        <div class="rooms">
+
+            <p><i class="fas fa-bath"></i> 	{{ property.bathrooms }}</p>
+            <p><i class="fas fa-bed"></i>{{ property.bedrooms }}</p>
+    
+    
+        </div>
+        <p><i class="fas fa-map-marker-alt"></i>	 {{ property.location }}</p>
+
+    
+        <div btn-container>
+            <button class="btn btn-primary btn-block "  >Email Realtor</button>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

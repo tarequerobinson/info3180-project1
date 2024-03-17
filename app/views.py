@@ -4,7 +4,12 @@ from flask import render_template, request, redirect, url_for, flash, session, a
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 from app.models import UserProfile
+from app.models import Property
+# from app.img_helper import get_all_properties
+ 
+
 from app.forms import LoginForm , UploadForm
+# UploadForm
 from werkzeug.security import check_password_hash
 from flask import send_from_directory
 
@@ -27,14 +32,37 @@ def about():
 
 
 @app.route('/upload', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def upload():
     form = UploadForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        upload = form.upload.data
-        filename = secure_filename(upload.filename)
-        upload.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash('File uploaded successfully!', 'success')
+    if form.validate_on_submit():
+        f = form.photo.data
+        filename = secure_filename(f.filename)
+        # f.save(os.path.join(os.path.dirname(app.root_path),  'uploads', filename))
+
+        uploads_folder = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
+        file_path = os.path.join(uploads_folder, filename)
+        f.save(file_path)
+
+
+        # Create a new Property instance using form data
+        property_title = form.title.data
+        description = form.description.data
+        location = form.location.data
+        property_type = form.type.data
+        bathrooms = form.number_of_bathrooms.data
+        bedrooms = form.number_of_bedrooms.data
+
+        price = form.price.data
+        image_path = filename  # Store just the filename, not the full path
+        
+        # Create a new Property instance and save it to the database
+        property_instance = Property(property_title=property_title, description=description, location=location, property_type=property_type, bathrooms=bathrooms, price=price , image_path=image_path , bedrooms=bedrooms)
+        db.session.add(property_instance)
+        db.session.commit()
+        
+        # Flash success message and redirect
+        flash('Property added successfully!', 'success')
         return redirect(url_for('home'))
     return render_template('upload.html', form=form)
 
@@ -117,7 +145,7 @@ def get_image(filename):
 
 
 @app.route('/files')
-@login_required
+# @login_required
 def files():
     images = get_uploaded_images()
     return render_template('files.html', images=images)
@@ -134,3 +162,23 @@ def logout():
         flash('You have been logged out successfully.', 'success')
     # Redirect the user to the home route
     return redirect(url_for('home'))
+
+
+@app.route('/properties')
+def display_properties():
+    properties = Property.query.all()
+    print (properties)
+    return render_template('properties.html', properties=properties)
+
+
+@app.route('/property/<int:id>')
+def display_property(id):
+    # Query the database to get the property by its ID
+    property = Property.query.get(id)
+
+    # If property doesn't exist, return 404 Not Found
+    if property is None:
+        abort(404)
+
+    # Render the template and pass the property object to it
+    return render_template('property.html', property=property)
